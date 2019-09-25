@@ -14,3 +14,24 @@ npx create-nx-workspace
 > remia-poc
 > SASS
 ```
+
+## Add Graphql to Nestjs
+```
+npm i --save @nestjs/graphql apollo-server-express graphql-tools graphql
+```
+
+Schema first approach:
+
+```typescript
+// api/src/app/app.module.ts
+@Module({
+  imports: [
+    GraphQLModule.forRoot({
+      typePaths: ['./**/*.graphql']
+    })
+  ],
+  controllers: [],
+  providers: []
+})
+export class AppModule {}
+```
