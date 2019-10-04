@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
+import { LeverancierModule } from './leverancier/leverancier.module';
+import { DatabaseModule } from './database.module';
+import { GraphqlModule } from './graphql.module';
 
 @Module({
-  imports: [
-    GraphQLModule.forRoot({
-      typePaths: ['./**/*.graphql']
-    })
-  ],
+  imports: [DatabaseModule, GraphqlModule, LeverancierModule],
   controllers: [],
   providers: []
 })

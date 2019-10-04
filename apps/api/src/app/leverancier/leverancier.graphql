@@ -1,0 +1,34 @@
+# Simplified Leverancier
+type Leverancier {
+  id: Int!
+  naam: String!
+  plaats: String!
+  postcode: String!
+  taalcode: TaalCode!
+  telefoon: String!
+  valutacode: ValutaCode!
+  # ...
+}
+
+# Constants
+enum TaalCode {
+  NL
+  US
+}
+
+enum ValutaCode {
+  EUR
+  USD
+}
+
+# Type to represent a Leverancier that couldn't be returned
+type LeverancierNotFound {
+  id: Int!
+  reason: String!
+}
+
+union LeverancierResult = Leverancier | LeverancierNotFound
+
+type Query {
+  leverancier(id: Int!): LeverancierResult!
+}
