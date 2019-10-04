@@ -1,27 +1,21 @@
-import { LeverancierResolver } from './leverancier.resolver';
+import { LeverancierResolver } from './graphql/leverancier.resolver';
 import { Module } from '@nestjs/common';
 import { LeverancierService } from './leverancier.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LeverancierEntity } from './leverancier.entity';
-import { TaalCode, ValutaCode } from '../../../graphql';
-import { LeverancierResultResolver } from './leverancier-result/leverancier-result.resolver';
 import { LeverancierRepository } from './leverancier.repository';
+import { TaalCode } from './graphql/taal-code.enum';
+import { ValutaCode } from './graphql/valuta-code.enum';
 
 /**
  * This module only contains Leverancier related logic.
  */
 @Module({
   imports: [TypeOrmModule.forFeature([LeverancierRepository])],
-  providers: [
-    LeverancierResolver,
-    LeverancierService,
-    LeverancierResultResolver
-  ]
+  providers: [LeverancierResolver, LeverancierService]
 })
 export class LeverancierModule {
-  constructor(
-    private readonly leverancierRepository: LeverancierRepository
-  ) {
+  constructor(private readonly leverancierRepository: LeverancierRepository) {
     this.guaranteeOneUserInDatabase();
   }
 

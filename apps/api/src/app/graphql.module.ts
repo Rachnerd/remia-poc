@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { join } from 'path';
+import * as path from 'path';
 
 @Module({
   imports: [
@@ -8,11 +8,20 @@ import { join } from 'path';
      * Schema-first approach.
      */
     GraphQLModule.forRoot({
-      typePaths: ['./**/*.graphql'],
-      definitions: {
-        path: join(process.cwd(), 'apps/api/graphql.ts'),
-        outputAs: 'interface'
-      }
+      /**
+       * /home/../remia/dist/apps/api (__dirname)
+       * to
+       * /home/../remia/apps/api/schema.grapqhl
+       */
+      autoSchemaFile: path.resolve(
+        __dirname,
+        '../',
+        '../',
+        '../',
+        'apps',
+        'api',
+        'schema.graphql'
+      )
     })
   ]
 })
