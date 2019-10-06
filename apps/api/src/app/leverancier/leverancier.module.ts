@@ -16,7 +16,7 @@ import { ValutaCode } from './graphql/valuta-code.enum';
 })
 export class LeverancierModule {
   constructor(private readonly leverancierRepository: LeverancierRepository) {
-    this.guaranteeOneUserInDatabase();
+    // this.guaranteeOneUserInDatabase();
   }
 
   /**
@@ -25,7 +25,7 @@ export class LeverancierModule {
   private async guaranteeOneUserInDatabase() {
     const users = await this.leverancierRepository.find();
     if (users.length === 0) {
-      const leverancierEntity = new LeverancierEntity();
+      const leverancierEntity: LeverancierEntity = new LeverancierEntity();
       leverancierEntity.naam = 'John Doe';
       leverancierEntity.plaats = 'Ergens';
       leverancierEntity.postcode = '1234AB';
@@ -33,9 +33,6 @@ export class LeverancierModule {
       leverancierEntity.telefoon = '06123456';
       leverancierEntity.valutacode = ValutaCode.EUR;
       await this.leverancierRepository.save(leverancierEntity);
-      console.log(leverancierEntity);
-    } else {
-      console.log(users);
     }
   }
 }

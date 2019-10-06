@@ -10,7 +10,7 @@ import { LeverancierRepository } from './leverancier.repository';
 export class LeverancierService {
   constructor(private readonly leverancierRepository: LeverancierRepository) {}
 
-  async getById(id: number): Promise<LeverancierEntity> {
+  async getById(id: number): Promise<Readonly<LeverancierEntity>> {
     const optionalLeverancier = await this.leverancierRepository.findOne(id);
     if (optionalLeverancier === undefined) {
       throw new EntityNotFoundException('Leverancier', id);
