@@ -1,0 +1,48 @@
+@startuml
+
+namespace frontend #DDDDDD {
+  AppComponent .down.> PageComponent
+  PageComponent -down-> SmartComponent
+}
+
+namespace generated #DDDDDD {
+  ApolloQueryOrMutationService -right- frontend.SmartComponent
+}
+
+namespace componentLib #DDDDDD {
+  frontend.SmartComponent -down-> UIComponent
+
+}
+namespace AngularMaterial #DDDDDD {
+  componentLib.UIComponent -down-> MatComponent
+}
+
+note right of frontend.AppComponent: Root of app
+
+note right of frontend.PageComponent
+  Contains router information and decides
+  what smart components should be displayed
+end note
+
+note right of frontend.SmartComponent
+  Binds data from a generated Apollo Service to ui-components and handles
+  their events by mutating state (also via generated Apollo services)
+end note
+
+note right of componentLib.UIComponent
+  Shared Remia ui-components that accept data (Input)
+  and emit events (Output)
+  ui-components don't have access to Apollo
+end note
+
+
+note top of generated.ApolloQueryOrMutationService
+  Generated service that holds a query/mutation implementation
+  based on one .graphql file
+end note
+
+note "Generated code by `graphql-code-generator`\nConsists of: types, queries, mutations and\nquery/mutation implementations (as Angular services)" as N1
+generated .. N1
+
+
+@enduml
