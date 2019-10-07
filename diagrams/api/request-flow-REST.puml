@@ -1,0 +1,39 @@
+@startuml
+actor Client
+
+Client -> Middleware: Http request
+Middleware -> Middleware: authenticate()
+Middleware -> Controller: Http request
+Controller -> Service: getEntity(params)
+Service -> AuthService: authorize()
+Service <-- AuthService: roles
+Service -> ValidationServiceN: validate(params)
+Service <-- ValidationServiceN: isValid
+Service -> BusinessLogicServiceN: doSomethingElse()
+Service <-- BusinessLogicServiceN: result
+Service -> Repository: interactWithDatabase()
+Service <-- Repository: entity
+Controller <-- Service: entity
+Controller -> Controller: convertToRestDto(entity)
+Middleware <-- Controller: entityRestDto
+Client <-- Middleware: REST data
+
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+box "Controller"
+participant Controller
+end box
+
+box "Service"
+participant Service
+participant AuthService
+participant ValidationServiceN
+participant BusinessLogicServiceN
+end box
+
+box "Repository"
+participant Repository
+end box
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+actor Client
+
+Client -> Middleware: query/mutation
+Middleware -> Middleware: authenticate()
+Middleware -> Resolver: query/mutation
+Resolver -> Service: getEntity(params)
+Service -> AuthService: authorize()
+Service <-- AuthService: roles
+Service -> ValidationServiceN: validate(params)
+Service <-- ValidationServiceN: isValid
+Service -> BusinessLogicServiceN: doSomethingElse()
+Service <-- BusinessLogicServiceN: result
+Service -> Repository: interactWithDatabase()
+Service <-- Repository: entity
+Resolver <-- Service: entity
+Resolver -> Resolver: convertToGqlDto(entity)
+Middleware <-- Resolver: entityGqlDto
+Client <-- Middleware: Gql data
+
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+box "Controller"
+participant Resolver
+end box
+
+box "Service"
+participant Service
+participant AuthService
+participant ValidationServiceN
+participant BusinessLogicServiceN
+end box
+
+box "Repository"
+participant Repository
+end box
+
+@enduml
