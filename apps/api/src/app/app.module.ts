@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { LeverancierModule } from './leverancier/leverancier.module';
 import { DatabaseModule } from './database.module';
-import { GraphqlModule } from './graphql.module';
+import { RemiaGraphqlModule } from './graphql.module';
 
 @Module({
-  imports: [DatabaseModule, GraphqlModule, LeverancierModule],
+  imports: [DatabaseModule, RemiaGraphqlModule, LeverancierModule, ],
   controllers: [],
   providers: []
 })

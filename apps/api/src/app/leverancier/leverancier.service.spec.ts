@@ -3,7 +3,7 @@ import { LeverancierRepository } from './leverancier.repository';
 import { Test } from '@nestjs/testing';
 import { EntityNotFoundException } from '../exceptions/entity-not-found.exception';
 import { MOCK_LEVERANCIER_ENTITY } from './leverancier.entity-mock';
-import { GraphqlModule } from '../graphql.module';
+import { RemiaGraphqlModule } from '../graphql.module';
 import { LeverancierModule } from './leverancier.module';
 import { LeverancierEntity } from './leverancier.entity';
 
@@ -16,7 +16,7 @@ describe('LeverancierService', () => {
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      imports: [GraphqlModule, LeverancierModule]
+      imports: [RemiaGraphqlModule, LeverancierModule]
     })
     /**
      * The repositories of the LeverancierModule need to be overridden because

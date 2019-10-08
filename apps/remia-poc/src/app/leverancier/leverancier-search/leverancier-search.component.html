@@ -1,0 +1,24 @@
+<div>
+  <mat-form-field>
+    <input
+      matInput
+      type="number"
+      placeholder="Leverancier id"
+      [formControl]="idFormControl"
+    />
+  </mat-form-field>
+</div>
+<ng-container *ngIf="idFormControl.valid; else formError">
+  <ng-container *ngIf="loading">
+    <ui-loader></ui-loader>
+  </ng-container>
+
+  <ng-container *ngIf="leverancierResult && !loading">
+    <ui-leverancier-result
+      [leverancierResult]="leverancierResult"
+    ></ui-leverancier-result>
+  </ng-container>
+</ng-container>
+<ng-template #formError>
+  {{idFormControl.errors | json}}
+</ng-template>

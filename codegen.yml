@@ -1,0 +1,15 @@
+schema:
+  - ./apps/api/schema.graphql
+documents: "./apps/remia-poc/src/**/*{.ts,.tsx,.graphql}"
+overwrite: true
+generates:
+  ./apps/remia-poc/src/app/fragmentTypes.json:
+    plugins:
+      - fragment-matcher
+  ./libs/api-interfaces/src/gql.model.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-apollo-angular
+    config:
+      preResolveTypes: true

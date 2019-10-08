@@ -1,0 +1,13 @@
+query LeverancierById($id: Int!) {
+  leverancier(id: $id) {
+    __typename
+    ... on Leverancier {
+      id
+      naam
+    }
+    ... on LeverancierNotFound {
+      id
+      reason
+    }
+  }
+}

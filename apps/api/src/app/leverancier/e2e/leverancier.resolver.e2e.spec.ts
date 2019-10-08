@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import { GraphqlModule } from '../../graphql.module';
+import { RemiaGraphqlModule } from '../../graphql.module';
 import { LeverancierModule } from '../leverancier.module';
 import { LeverancierRepository } from '../leverancier.repository';
 import { TestDatabaseModule } from '../../../test/test-database.module';
@@ -35,7 +35,7 @@ describe('Leverancier e2e test', () => {
      * For this e2e test a test database is used together with the GraphQL functionality.
      */
     const module = await Test.createTestingModule({
-      imports: [GraphqlModule, TestDatabaseModule, LeverancierModule]
+      imports: [RemiaGraphqlModule, TestDatabaseModule, LeverancierModule]
     }).compile();
 
     /**

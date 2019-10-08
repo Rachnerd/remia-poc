@@ -25,4 +25,4 @@ import * as path from 'path';
     })
   ]
 })
-export class GraphqlModule {}
+export class RemiaGraphqlModule {}
